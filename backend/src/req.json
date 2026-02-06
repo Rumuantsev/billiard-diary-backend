@@ -1,0 +1,10 @@
+{
+  "balls": [
+    { "id": "1", "x": 2, "y": 2, "type": "solid" }
+  ],
+  "lines": [
+    { "id": "1", "from": {"x": 2,"y": 2, "to": {"x": 3,"y": 3}, "style": "solid"}
+  ],
+  "power": 6,
+  "spin": { "id": "1", "x": 2, "y": 2, "type": "solid" }
+}
