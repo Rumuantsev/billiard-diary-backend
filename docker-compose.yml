@@ -11,7 +11,8 @@ services:
 
     volumes:
       - pgdata:/var/lib/postgresql/data
-      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - .backend/src/init.sql:/docker-entrypoint-initdb.d/init.sql
+
   backend:
     build: ./backend
     container_name: billiard_diary_backend
