@@ -1,15 +1,28 @@
 services:
   db:
     image: postgres:16
-    container_name: positions_db
+    container_name: billiard_diary_db
     environment:
-      POSTGRES_USER: app
-      POSTGRES_PASSWORD: app
-      POSTGRES_DB: positions
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: billiard_diary
     ports:
-      - "5432:5432"
+      - "5433:5432"
+
     volumes:
       - pgdata:/var/lib/postgresql/data
-
+  backend:
+    build: ./backend
+    container_name: billiard_diary_backend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: billiard_diary
 volumes:
   pgdata:
