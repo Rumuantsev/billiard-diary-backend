@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
-const positionsRouter = require("./positions.controller");
+
+const positionsRouter = require("./routes/positions.route");
 
 const app = express();
 app.use(cors());
