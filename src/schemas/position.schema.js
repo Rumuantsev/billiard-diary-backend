@@ -63,6 +63,7 @@ module.exports = {
                   y: { type: "number" },
                 },
               },
+              type: { type: "string" },
             },
           },
         },
