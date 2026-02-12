@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS position (
+  id SERIAL PRIMARY KEY,
+  layout JSONB NOT NULL,
+  power DOUBLE PRECISION,
+  created_at TIMESTAMP DEFAULT now(),
+  updated_at TIMESTAMP DEFAULT now()
+);

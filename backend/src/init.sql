@@ -1,6 +1,0 @@
-CREATE TABLE IF NOT EXISTS position (
-  id SERIAL PRIMARY KEY,
-  data JSONB NOT NULL,
-  created_at TIMESTAMP DEFAULT NOW(),
-  updated_at TIMESTAMP DEFAULT NOW()
-);
