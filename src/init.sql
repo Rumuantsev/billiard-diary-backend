@@ -1,7 +1,8 @@
-CREATE TABLE IF NOT EXISTS position (
+CREATE TABLE IF NOT EXISTS exercise (
   id SERIAL PRIMARY KEY,
-  layout JSONB NOT NULL,
-  power DOUBLE PRECISION,
+  title TEXT NOT NULL,
+  description TEXT,
+  position JSONB,
   created_at TIMESTAMP DEFAULT now(),
   updated_at TIMESTAMP DEFAULT now()
 );
