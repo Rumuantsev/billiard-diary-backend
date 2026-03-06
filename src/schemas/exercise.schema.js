@@ -1,34 +1,21 @@
 module.exports = {
   type: "object",
-  required: ["layout", "power"],
+  required: ["title"],
   additionalProperties: false,
 
   properties: {
-    power: {
-      type: "number",
-    },
+    title: { type: "string" },
+    description: { type: "string" },
 
-    layout: {
+    position: {
       type: "object",
-      required: ["balls"],
       additionalProperties: false,
-
       properties: {
-        spin: {
-          type: "object",
-          required: ["x", "y"],
-          additionalProperties: false,
-          properties: {
-            x: { type: "number" },
-            y: { type: "number" },
-          },
-        },
-
         balls: {
           type: "array",
           items: {
             type: "object",
-            required: ["x", "y"],
+            required: ["x", "y", "type"],
             additionalProperties: false,
             properties: {
               x: { type: "number" },
@@ -37,36 +24,36 @@ module.exports = {
             },
           },
         },
-
         lines: {
           type: "array",
           items: {
             type: "object",
-            required: ["from", "to"],
+            required: ["from", "to", "type"],
             additionalProperties: false,
             properties: {
               from: {
                 type: "object",
                 required: ["x", "y"],
                 additionalProperties: false,
-                properties: {
-                  x: { type: "number" },
-                  y: { type: "number" },
-                },
+                properties: { x: { type: "number" }, y: { type: "number" } },
               },
               to: {
                 type: "object",
                 required: ["x", "y"],
                 additionalProperties: false,
-                properties: {
-                  x: { type: "number" },
-                  y: { type: "number" },
-                },
+                properties: { x: { type: "number" }, y: { type: "number" } },
               },
               type: { type: "string" },
             },
           },
         },
+        spin: {
+          type: "object",
+          required: ["x", "y"],
+          additionalProperties: false,
+          properties: { x: { type: "number" }, y: { type: "number" } },
+        },
+        power: { type: "number" },
       },
     },
   },
