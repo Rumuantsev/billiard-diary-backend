@@ -1,15 +1,29 @@
 const Ajv = require("ajv");
 const addFormats = require("ajv-formats");
+const AppError = require("../utils/appError");
 
-const ajv = new Ajv({ allErrors: true, removeAdditional: true });
+const ajv = new Ajv({
+  allErrors: true,
+  coerceTypes: true,
+  useDefaults: true,
+});
 addFormats(ajv);
 
-const validate = (schema) => {
+const validate = (schema, source = "body") => {
   const validator = ajv.compile(schema);
   return (req, res, next) => {
-    const valid = validator(req.body);
-    if (!valid)
-      return res.status(400).json({ ok: false, errors: validator.errors });
+    const valid = validator(req[source]);
+    if (!valid) {
+      return next(
+        new AppError(
+          400,
+          "validation_error",
+          "Request validation failed",
+          validator.errors,
+        ),
+      );
+    }
+
     next();
   };
 };
