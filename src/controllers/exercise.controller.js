@@ -7,15 +7,8 @@ const createExercise = asyncHandler(async (req, res) => {
 });
 
 const getExercises = asyncHandler(async (req, res) => {
-  const exercises = await service.getExercises(req.query, req.user);
-  res.json({
-    ok: true,
-    exercises,
-    pagination: {
-      limit: req.query.limit,
-      offset: req.query.offset,
-    },
-  });
+  const result = await service.getExercises(req.query, req.user);
+  res.json({ ok: true, ...result });
 });
 
 const getExerciseById = asyncHandler(async (req, res) => {
