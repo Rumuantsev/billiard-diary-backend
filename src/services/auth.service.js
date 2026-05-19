@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const config = require("../config");
 const AppError = require("../utils/appError");
 const userRepository = require("../repositories/user.repository");
+const { toCamelUser } = require("../utils/caseMapper");
 
 const normalizeEmail = (email) => email.trim().toLowerCase();
 
@@ -19,7 +20,7 @@ const signAccessToken = (user) =>
 
 const buildAuthResponse = (user) => ({
   accessToken: signAccessToken(user),
-  user,
+  user: toCamelUser(user),
 });
 
 const getRegistrationPlan = async (role, currentUser) => {
@@ -105,7 +106,7 @@ const login = async ({ email, password }) => {
   return buildAuthResponse(publicUser);
 };
 
-const getMe = async (currentUser) => currentUser;
+const getMe = async (currentUser) => toCamelUser(currentUser);
 
 module.exports = {
   register,

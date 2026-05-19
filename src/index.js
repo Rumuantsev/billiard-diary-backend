@@ -4,6 +4,10 @@ const cors = require("cors");
 const config = require("./config");
 const authRouter = require("./routes/auth.route");
 const exercisesRouter = require("./routes/exercise.route");
+const foldersRouter = require("./routes/folder.route");
+const groupsRouter = require("./routes/group.route");
+const trainingsRouter = require("./routes/training.route");
+const usersRouter = require("./routes/user.route");
 const errorHandler = require("./middlewares/errorHandler");
 
 const app = express();
@@ -16,6 +20,10 @@ app.get("/health", (req, res) => {
 
 app.use("/auth", authRouter);
 app.use("/exercises", exercisesRouter);
+app.use("/folders", foldersRouter);
+app.use("/groups", groupsRouter);
+app.use("/trainings", trainingsRouter);
+app.use("/users", usersRouter);
 
 app.use((req, res) => {
   res.status(404).json({
