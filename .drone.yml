@@ -41,7 +41,7 @@ steps:
         curl -X POST http://82.179.9.27:8080/deploy \
           -H "Content-Type: application/json" \
           -H "X-Deploy-Token: $DEPLOY_TOKEN" \
-          -d "{\"user\":\"$GITEA_USERNAME\",\"repo\":\"billiard_diary_backend\",\"tag\":\"$DRONE_COMMIT_SHA\",\"port\":3105}"
+          -d "{\"user\":\"$GITEA_USERNAME\",\"repo\":\"billiard-diary-backend\",\"tag\":\"$DRONE_COMMIT_SHA\",\"port\":3105}"
     when:
       branch:
         - main
