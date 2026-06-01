@@ -6,7 +6,6 @@ Backend service for a billiard training diary.
 
 - Node.js 18 or newer
 - Docker and Docker Compose
-- Git
 
 ## Quick Start
 

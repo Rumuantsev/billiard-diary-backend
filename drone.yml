@@ -16,7 +16,7 @@ steps:
     commands:
       - |
         REGISTRY_URL="82.179.9.27:3000"
-        IMAGE_NAME="$REGISTRY_URL/flash5764/billiard-diary-backend"
+        IMAGE_NAME="$REGISTRY_URL/flash5764/billiard_diary_backend"
 
         echo "$GITEA_SECRET_KEY" | podman login "$REGISTRY_URL" \
           --username "$GITEA_USERNAME" \
@@ -25,8 +25,7 @@ steps:
 
         podman build -f Dockerfile -t "$IMAGE_NAME:$DRONE_COMMIT_SHA" .
         podman tag "$IMAGE_NAME:$DRONE_COMMIT_SHA" "$IMAGE_NAME:latest"
-
-        podman push --tls-verify=false "$IMAGE_NAME:$DRONE_COMMIT_SHA"
+      
         podman push --tls-verify=false "$IMAGE_NAME:latest"
 
   - name: trigger-deploy
@@ -34,14 +33,18 @@ steps:
     environment:
       DEPLOY_TOKEN:
         from_secret: DEPLOY_TOKEN
+      DEPLOY_PORT:
+        from_secret: DEPLOY_PORT
+      REVERSE_PORT:
+        from_secret: REVERSE_PORT
       GITEA_USERNAME:
         from_secret: GITEA_USERNAME
     commands:
       - |
-        curl -X POST http://82.179.9.27:8080/deploy \
+        curl -X POST http://82.179.9.27:8089/deploy \
           -H "Content-Type: application/json" \
           -H "X-Deploy-Token: $DEPLOY_TOKEN" \
-          -d "{\"user\":\"$GITEA_USERNAME\",\"repo\":\"billiard-diary-backend\",\"tag\":\"$DRONE_COMMIT_SHA\",\"port\":3105}"
+          -d "{\"user\":\"$GITEA_USERNAME\",\"repo\":\"billiard_diary_backend\",\"tag\":\"$DRONE_COMMIT_SHA\",\"port\":$DEPLOY_PORT,\"reverse_port\":\"$REVERSE_PORT\"}"
     when:
       branch:
         - main

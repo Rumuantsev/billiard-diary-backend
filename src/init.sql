@@ -129,12 +129,6 @@ WITH seed_users AS (
       '$2b$12$oiuBfn8HkXyYxNqr8k0mT.uvc7oYanCGfklqCvQgmMyq1XUy6Pzse',
       'Coach User',
       'coach'
-    ),
-    (
-      'stas.dementev@example.com',
-      '$2b$12$ivhM8SmewZH7r97Sny/Y5u7n7ecSkv3wmuz5UMs9BvCuiVqLoNZSu',
-      'Стас Деменьтьев',
-      'coach'
     )
   ON CONFLICT (email) WHERE deleted_at IS NULL DO UPDATE
   SET
